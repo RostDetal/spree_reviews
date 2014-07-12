@@ -1,27 +1,42 @@
 <%= form_for review, :url => product_reviews_path(product), :html => {:method => :post} do |f| %>
   <%= render "spree/shared/error_messages", :target => review %>
 
-  <p class="review_rating_field">
-    <%= f.label :rating %> <span class="required">*</span><br />
-    <%= render "spree/reviews/stars", :stars => review.rating, :edit_enabled => true %>
+  <p class="review_rating_field" style="width: 100%; display: block; text-align: center">
+
+    <div class="star-rating-offset-left">
+      <%= content_tag :span, Spree.t(:leave_us_a_review_for, :name => @product.name), :class => 'section-title', :style =>"font-size:1.2em; float:left; margin-left:60px;" %>
+    </div>
+    <div class="star-rating-offset-right">
+
+        <%= render "spree/reviews/stars", :stars => review.rating, :edit_enabled => true %>
+    </div>
   </p>
 
-  <p class="review_name_field">
-    <%= f.label :name %> <span class="required">*</span><br />
-    <%= f.text_field :name, :maxlength => "255", :size => "50" %>
+  <p class="review_name_field" style="width: 100%; text-align: center; padding: 0px; margin: 0px;">
+    <% if site_current_user_name%>
+         <%= f.text_field :name, :value => site_current_user_name, :placeholder=> Spree.t("review_new_name") , :maxlength => "100", :style => "width:900px; height:35px;font-size:1.3em;"%>
+    <%else%>
+        <%= f.text_field :name, :placeholder=> Spree.t("review_new_name"), :maxlength => "100", :style => "width:900px;height:35px;font-size:1.3em;"%>
+    <%end%>
   </p>
 
-  <p class="review_title_field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title, :maxlength => "255", :size => "50" %>
+  <!--<p class="review_title_field">-->
+    <!--<%= f.label :title %>-->
+    <!--<%= f.text_field :title, :maxlength => "255", :size => "50" %>-->
+  <!--</p>-->
+
+  <p class="review_review_field" style="width: 100%; text-align: center; padding-top:0px;">
+    <!--<span class="required" style="position: absolute; right: 90px;">*</span>-->
+    <%= f.text_area :review, :placeholder=> Spree.t("review_new_text"), :wrap => "none", :rows => "10", :style => "width:900px; font-size:1.3em;"%>
+
   </p>
 
-  <p class="review_review_field">
-    <%= f.label :review %> <span class="required">*</span><br />
-    <%= f.text_area :review, :wrap => "virtual", :rows => "10", :cols => "50" %>
-  </p>
+  <div class="review-submit-block">
+    <!--<%= f.submit Spree.t(:submit_your_review), :class => "review-submit-button" %>-->
 
-  <p class="review_submit">
-    <%= f.submit Spree.t(:submit_your_review), :class => "button bg_darkfirst" %>
-  </p>
+    <%= button_tag :class => 'review-submit-button', :style=>"float:none; width:200px; margin:auto; text-transform:uppercase;", :type => :submit, :rel=> "nofollow, noindex" do%>
+        <%=Spree.t(:submit_your_review)%>
+    <%end%>
+
+  </div>
 <% end %>

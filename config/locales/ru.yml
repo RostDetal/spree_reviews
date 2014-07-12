@@ -27,7 +27,7 @@ ru:
     info_approve_review: Отзыв одобрен
     error_approve_review: Ошибка при одобрении отзыва
     approve: Одобрить
-    leave_us_a_review_for: "Пожалуйста, оставьте отзыв и оценку для"
+    leave_us_a_review_for: "Пожалуйста, оставьте отзыв и оценку для «%{name}»"
     review_successfully_submitted: Ваш отзыв был успешно отправлен
     rating: Оценка
     submit_your_review: Оставить отзыв
